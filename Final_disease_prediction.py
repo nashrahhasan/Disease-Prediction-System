@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 ''
 
-
+import os
 import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
@@ -12,12 +12,14 @@ from sklearn.metrics import DistanceMetric
 
 #D:\1-MIT\MIT_Project\PCOS_model\Saved_model2
 
-pcos_model1= pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/eclf_pc_model.sav', 'rb'))
-pcos_model2= pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/bnb_pc_model.sav', 'rb'))
-pcos_model3= pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/gnb_pc_model.sav', 'rb'))
-pcos_model4= pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/rfc_pc_model.sav', 'rb'))
+working_dir = os.path.dirname(os.path.abspath(__file__))
+
+pcos_model1= pickle.load(open(f'{working_dir}/trained_model_lgr_lasso.sav', 'rb'))
+pcos_model2= pickle.load(open(f'{working_dir}/trained_model_gnb_lasso.sav', 'rb'))
+pcos_model3= pickle.load(open(f'{working_dir}/trained_model_lda_lasso.sav', 'rb'))
+pcos_model4= pickle.load(open(f'{working_dir}/trained_model_rfc_lasso.sav', 'rb'))
 #pcos_model5 = pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/svm_pc_model.sav', 'rb'))
-pcos_model6 = pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/Lda_pc_model.sav', 'rb'))
+#pcos_model6 = pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/Lda_pc_model.sav', 'rb'))
 #pcos_model = pickle.load(open('D:/1-MIT/MIT PRoect/PCOS_model/Saved_models/PCOS_model_lasso_knn.sav','rb'))
 
 #pa
@@ -31,13 +33,13 @@ with st.sidebar:
                           
                           ['PCOS Prediction Model-1',
                            'PCOS Prediction Model-2',
-                           'PCOS Prediction Model-3',
-                           'PCOS Prediction Model-4',
-                           'PCOS Prediction Model-6'],
-                          icons=['person','person','person','person','person'],
-                          default_index=0)
+                          'PCOS Prediction Model-3',
+                          'PCOS Prediction Model-4'],
+                        #   'PCOS Prediction Model-4',
+                        #   'PCOS Prediction Model-6'],
+                           icons=['person','person','person', 'person'],
+                            default_index=0)
  
-   
 if (selected == 'PCOS Prediction Model-1'):
     
     # page title
@@ -61,17 +63,11 @@ if (selected == 'PCOS Prediction Model-1'):
         
     
     with col1:
-        Pimples = st.number_input('Pimples/Or not')
-    
-    with col2:
-        Fast_food = st.number_input('Eats_Fast_food/or not')
-    
-    with col1:
-        FollicleNo_L = st.number_input('No of Follicle_L')
+        FollicleNo_L = st.number_input('No of Follicle Left')
     
     
     with col2:
-        FollicleNo_R  = st.number_input('No of Follicle_R')
+        FollicleNo_R  = st.number_input('No of Follicle Right')
     
     
     
@@ -82,7 +78,7 @@ if (selected == 'PCOS Prediction Model-1'):
     # creating a button for Prediction
     
     if st.button('PCOS Prediction Result'):
-        pcos_prediction = pcos_model1.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening, Pimples,Fast_food,FollicleNo_L, FollicleNo_R]])
+        pcos_prediction = pcos_model1.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening,FollicleNo_L, FollicleNo_R]])
         
         if (pcos_prediction[0] == 0):
           pcos_diagnosis = 'The person does not have pcos'
@@ -118,12 +114,6 @@ if (selected == 'PCOS Prediction Model-2'):
         
     
     with col1:
-        Pimples = st.number_input('Pimples/Or not')
-    
-    with col2:
-        Fast_food = st.number_input('Eats_Fast_food/or not')
-    
-    with col1:
         FollicleNo_L = st.number_input('No of Follicle_L')
     
     
@@ -139,7 +129,7 @@ if (selected == 'PCOS Prediction Model-2'):
     # creating a button for Prediction
     
     if st.button('PCOS Prediction Result'):
-        pcos_prediction = pcos_model1.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening, Pimples,Fast_food,FollicleNo_L, FollicleNo_R]])
+        pcos_prediction = pcos_model2.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening,FollicleNo_L, FollicleNo_R]])
         
         if (pcos_prediction[0] == 0):
           pcos_diagnosis2 = 'The person does not have pcos'
@@ -174,13 +164,7 @@ if (selected == 'PCOS Prediction Model-3'):
     
     with col2:
         Skin_darkening = st.number_input('Darkenened skin/or not')
-        
-    
-    with col1:
-        Pimples = st.number_input('Pimples/Or not')
-    
-    with col2:
-        Fast_food = st.number_input('Eats_Fast_food/or not')
+
     
     with col1:
         FollicleNo_L = st.number_input('No of Follicle_L')
@@ -198,7 +182,7 @@ if (selected == 'PCOS Prediction Model-3'):
     # creating a button for Prediction
     
     if st.button('PCOS Prediction Result'):
-        pcos_prediction = pcos_model1.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening, Pimples,Fast_food,FollicleNo_L, FollicleNo_R]])
+        pcos_prediction = pcos_model3.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening,FollicleNo_L, FollicleNo_R]])
         
         if (pcos_prediction[0] == 0):
           pcos_diagnosis3 = 'The person does not have pcos'
@@ -207,8 +191,7 @@ if (selected == 'PCOS Prediction Model-3'):
         
     st.success(pcos_diagnosis3)
 
-    
-  #model-4
+  
 
 if (selected == 'PCOS Prediction Model-4'):
     
@@ -233,92 +216,31 @@ if (selected == 'PCOS Prediction Model-4'):
         
     
     with col1:
-        Pimples = st.number_input('Pimples/Or not')
-    
-    with col2:
-        Fast_food = st.number_input('Eats_Fast_food/or not')
-    
-    with col1:
-        FollicleNo_L = st.number_input('No of Follicle_L')
+        FollicleNo_L = st.number_input('No of Follicle Left')
     
     
     with col2:
-        FollicleNo_R  = st.number_input('No of Follicle_R')
+        FollicleNo_R  = st.number_input('No of Follicle Right')
     
     
     
     
     # code for Prediction
-    pcos_diagnosis4 = ''
+    pcos_diagnosis = ''
     
     # creating a button for Prediction
     
     if st.button('PCOS Prediction Result'):
-        pcos_prediction = pcos_model4.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening, Pimples,Fast_food,FollicleNo_L, FollicleNo_R]])
+        pcos_prediction = pcos_model4.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening,FollicleNo_L, FollicleNo_R]])
         
         if (pcos_prediction[0] == 0):
-          pcos_diagnosis4 = 'The person does not have pcos'
+          pcos_diagnosis = 'The person does not has pcos'
         else:
-          pcos_diagnosis4 = 'The person have risk of pcos'
+          pcos_diagnosis = 'The person has pcos'
         
-    st.success(pcos_diagnosis4)
+    st.success(pcos_diagnosis)
 
-    
-      
-    
-# Diabetes Prediction Page
-if (selected == 'PCOS Prediction Model-6'):
-    
-    # page title
-    st.title('PCOS Prediction')
-    
-    
-    # getting the input data from the user
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        Cycle = st.number_input('Regular/Irregular Cycle')
-        
-    with col2:
-        Weight_gain = st.number_input('Weight increased/Or not')
-    
-    with col1:
-        hair_growth = st.number_input('Excessive_Hair_growth/Or not')
-    
-    with col2:
-        Skin_darkening = st.number_input('Darkenened skin/or not')
-        
-    
-    with col1:
-        Pimples = st.number_input('Pimples/Or not')
-    
-    with col2:
-        Fast_food = st.number_input('Eats_Fast_food/or not')
-    
-    with col1:
-        FollicleNo_L = st.number_input('No of Follicle_L')
-    
-    
-    with col2:
-        FollicleNo_R  = st.number_input('No of Follicle_R')
-    
-    
-    
-    
-    # code for Prediction
-    pcos_diagnosis5 = ''
-    
-    # creating a button for Prediction
-    
-    if st.button('PCOS Prediction Result'):
-        pcos_prediction = pcos_model6.predict([[Cycle, Weight_gain, hair_growth, Skin_darkening, Pimples,Fast_food,FollicleNo_L, FollicleNo_R]])
-        
-        if (pcos_prediction[0] == 0):
-          pcos_diagnosis5 = 'The person does not have pcos'
-        else:
-          pcos_diagnosis5 = 'The person have risk of pcos'
-        
-    st.success(pcos_diagnosis5)
+
 
 
 #Cycle	Weight_gain	hair_growth	Skin_darkening	FollicleNo_L	FollicleNo_R
