@@ -10,7 +10,7 @@ from sklearn.metrics import DistanceMetric
 
 # loading the saved models
 
-#D:\1-MIT\MIT_Project\PCOS_model\Saved_model2
+
 
 working_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -241,11 +241,3 @@ if (selected == 'PCOS Prediction Model-4'):
     st.success(pcos_diagnosis)
 
 
-
-
-#Cycle	Weight_gain	hair_growth	Skin_darkening	FollicleNo_L	FollicleNo_R
-
-
-
-
-# Diabetes Prediction Page
