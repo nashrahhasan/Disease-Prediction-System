@@ -10,15 +10,23 @@ from sklearn.metrics import DistanceMetric
 
 # loading the saved models
 
-working_dir = os.path.dirname(os.path.abspath(__file__))
+#working_dir = os.path.dirname(os.path.abspath(__file__))
+filename1 = 'trained_model_lgr_lasso.sav'
+filename2 = 'trained_model_gnb_lasso.sav'
+filename3 = 'trained_model_lda_lasso.sav'
+filename4 = 'trained_model_rfc_lasso.sav'
 
-pcos_model1= pickle.load(open(f'{working_dir}/trained_model_lgr_lasso.sav', 'rb'))
-pcos_model2= pickle.load(open(f'{working_dir}/trained_model_gnb_lasso.sav', 'rb'))
-pcos_model3= pickle.load(open(f'{working_dir}/trained_model_lda_lasso.sav', 'rb'))
-pcos_model4= pickle.load(open(f'{working_dir}/trained_model_rfc_lasso.sav', 'rb'))
-#pcos_model5 = pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/svm_pc_model.sav', 'rb'))
-#pcos_model6 = pickle.load(open('D:/1-MIT/MIT_Project/PCOS_model/Saved_model2/Lda_pc_model.sav', 'rb'))
-#pcos_model = pickle.load(open('D:/1-MIT/MIT PRoect/PCOS_model/Saved_models/PCOS_model_lasso_knn.sav','rb'))
+pcos_model1= pickle.load(open(filename1, 'rb'))
+pcos_model2= pickle.load(open(filename2, 'rb'))
+pcos_model3= pickle.load(open(filename3, 'rb'))
+pcos_model4= pickle.load(open(filename4, 'rb'))
+
+
+#pcos_model1= pickle.load(open(f'{working_dir}/trained_model_lgr_lasso.sav', 'rb'))
+#pcos_model2= pickle.load(open(f'{working_dir}/trained_model_gnb_lasso.sav', 'rb'))
+#pcos_model3= pickle.load(open(f'{working_dir}/trained_model_lda_lasso.sav', 'rb'))
+#pcos_model4= pickle.load(open(f'{working_dir}/trained_model_rfc_lasso.sav', 'rb'))
+
 
 
 # sidebar for navigation
